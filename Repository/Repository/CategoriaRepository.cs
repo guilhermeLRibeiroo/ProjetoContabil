@@ -48,7 +48,8 @@ namespace Repository.Repository
         public Categoria ObterPeloId(int id)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "SELECT * FROM categorias";
+            comando.CommandText = "SELECT * FROM categorias WHERE id = @ID";
+            comando.Parameters.AddWithValue("@ID", id);
 
             DataTable tabela = new DataTable();
             tabela.Load(comando.ExecuteReader());
@@ -71,7 +72,7 @@ namespace Repository.Repository
         {
             SqlCommand comando = Conexao.AbrirConexao();
             busca = $"%{busca}%";
-            comando.CommandText = "SELECT * FROM categorias WHERE nome LIKE @BUSCA ORDER BY nome ASC";
+            comando.CommandText = "SELECT * FROM categorias WHERE nome LIKE @BUSCA ORDER BY id ASC";
             comando.Parameters.AddWithValue("@BUSCA", busca);
 
             DataTable tabela = new DataTable();
