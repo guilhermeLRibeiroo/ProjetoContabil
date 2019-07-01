@@ -261,9 +261,11 @@ __pycache__/
 
 # Project debug things.
 .vs/
-Model/obj/
 Model/bin/
-Repository/obj/
+Model/obj/
+Model/obj/Debug
 Repository/bin/
-View/bin/
 Repository/obj/
+Repository/obj/Debug/
+View/bin/
+View/obj/
