@@ -260,6 +260,6 @@ __pycache__/
 *.pyc
 
 # Project debug things.
-/bin
-/obj
+**/bin/*
+**/obj/*
 .vs/
