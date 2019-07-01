@@ -259,11 +259,7 @@ paket-files/
 __pycache__/
 *.pyc
 
-# Project bin etc.
-Model/bin
-Model/obj
-Repository/bin
-Repository/obj
-View/bin
-View/obj
+# Project debug things.
+/bin
+/obj
 .vs/
