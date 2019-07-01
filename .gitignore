@@ -263,9 +263,8 @@ __pycache__/
 .vs/
 Model/bin/
 Model/obj/
-Model/obj/Debug
 Repository/bin/
 Repository/obj/
-Repository/obj/Debug/
 View/bin/
 View/obj/
+**/Debug/
