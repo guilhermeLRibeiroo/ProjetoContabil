@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<h3 class="text-center">Cadastrar Contabilidade</h3>
+
+<form action="@Url.Action("Store")" method="post" class="offset-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-nome" class="text-center">Nome</label>
+                <input type="text" name="nome" id="campo-nome col-6" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
+        </div>
+    </div>
+</form>

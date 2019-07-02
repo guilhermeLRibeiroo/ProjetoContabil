@@ -9,6 +9,6 @@ namespace Model
     public class Contabilidade
     {
         public int Id;
-        public string nome;
+        public string Nome;
     }
 }
