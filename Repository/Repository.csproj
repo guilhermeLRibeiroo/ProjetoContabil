@@ -44,8 +44,10 @@
   <ItemGroup>
     <Compile Include="Database\Conexao.cs" />
     <Compile Include="Interface\ICategoriaRepository.cs" />
+    <Compile Include="Interface\IContabilidadeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CategoriaRepository.cs" />
+    <Compile Include="Repository\ContabilidadeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
@@ -56,6 +58,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Database\CategoriaEstrutura.sql" />
+    <Content Include="Database\ContabilidadeEstrutura.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
