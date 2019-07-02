@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="text-center">Index</h3>
+
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-dark" href="@Url.Action("Cadastrar")"><i class="fas fa-plus"></i> Nova Categoria</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-9 offset-1">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Model.Contabilidade contabilidade in ViewBag.Contabilidade)
+                {
+                    <tr class="text-center">
+                        <td>@contabilidade.Id</td>
+                        <td>@contabilidade.Nome</td>
+                        <td>
+                            <a href="@Url.Action("Editar", new { id = contabilidade.Id})" class="btn btn-dark"><i class="fas fa-pen"></i> Editar</a>
+                            <a href="@Url.Action("Apagar", new { id = contabilidade.Id})" class="btn btn-dark"><i class="fas fa-trash"></i> Apagar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="text-center">
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Ação</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
