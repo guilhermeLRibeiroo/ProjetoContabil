@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,7 @@ namespace Model
     {
         public int Id;
         public int IdContabilidade;
+        public Contabilidade Contabilidade;
         public string Nome;
         public string CPF;
     }
