@@ -1,4 +1,4 @@
-﻿DROP TABLE usuarios;
+﻿DROP TABLE IF EXISTS usuarios;
 
 CREATE TABLE usuarios (
 	id INT PRIMARY KEY IDENTITY(1,1),
@@ -6,5 +6,5 @@ CREATE TABLE usuarios (
 	senha VARCHAR(100),
 	data_nascimento DATETIME2,
 	id_contabilidade INT,
-	FOREIGN KEY (id_contabilidade) REFERENCES categorias(id)
+	FOREIGN KEY (id_contabilidade) REFERENCES contabilidades(id)
 );

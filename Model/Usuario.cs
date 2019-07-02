@@ -11,7 +11,7 @@ namespace Model
         public int Id;
         public string Login;
         public string Senha;
-        public DateTime Data_Nascimento;
+        public DateTime DataNascimento;
         public int IdContabilidade;
     }
 }
