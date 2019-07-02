@@ -9,9 +9,9 @@ namespace Repository.Interface
 {
     interface IContabilidadeRepository
     {
-        int Inserir(Contabilidade contab);
+        int Inserir(Contabilidade contabilidade);
 
-        bool Atualizar(Contabilidade categoria);
+        bool Atualizar(Contabilidade contabilidade);
 
         bool Apagar(int id);
 
