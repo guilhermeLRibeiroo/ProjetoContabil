@@ -57,8 +57,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Database\CategoriaEstrutura.sql" />
-    <Content Include="Database\ContabilidadeEstrutura.sql" />
+    <Content Include="Database\CategoriasEstrutura.sql" />
+    <Content Include="Database\ContabilidadesEstrutura.sql" />
+    <Content Include="Database\UsuariosEstrutura.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
