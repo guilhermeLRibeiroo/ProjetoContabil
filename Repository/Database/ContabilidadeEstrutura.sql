@@ -1,3 +1,0 @@
-﻿DROP TABLE IF EXISTS contabilidade;
-
-CREATE TABLE 
