@@ -3,6 +3,7 @@ using Repository.Database;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repository
 {
-    class ClienteRepository : IClienteRepository
+    public class ClienteRepository : IClienteRepository
     {
         public bool Apagar(int id)
         {
@@ -51,12 +52,53 @@ namespace Repository.Repository
 
         public Cliente ObterPeloId(int id)
         {
-            throw new NotImplementedException();
+            SqlCommand comando = Conexao.AbrirConexao();
+            comando.CommandText = "SELECT * FROM clientes WHERE id = @ID";
+            comando.Parameters.AddWithValue("@ID", id);
+
+            DataTable table = new DataTable();
+            table.Load(comando.ExecuteReader());
+            comando.Connection.Close();
+
+            if (table.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            DataRow row = table.Rows[0];
+            return new Cliente() {
+                Id = id,
+                CPF = row["cpf"].ToString(),
+                Nome = row["nome"].ToString(),
+                IdContabilidade = Convert.ToInt32(row["id_contabilidade"]),
+            };
+
         }
 
         public List<Cliente> ObterTodos(string busca)
         {
-            throw new NotImplementedException();
+            SqlCommand comando = Conexao.AbrirConexao();
+            comando.CommandText = @"SELECT clientes.id AS 'Id', clientes.cpf AS 'CPF', clientes.nome AS 'Nome', contabilidades.Nome AS 'NomeContabilidade', contabilidades.Id AS 'IdContabilidade'
+FROM clientes INNER JOIN contabilidades ON (clientes.id_contabilidade = contabilidades.id)";
+
+            DataTable table = new DataTable();
+            table.Load(comando.ExecuteReader());
+            comando.Connection.Close();
+            List<Cliente> clientes = new List<Cliente>();
+            
+            foreach(DataRow row in table.Rows)
+            {
+                clientes.Add(new Cliente()
+                {
+                    Id = Convert.ToInt32(row["Id"]),
+                    CPF = row["CPF"].ToString(),
+                    Nome = row["Nome"].ToString(),
+                    IdContabilidade = Convert.ToInt32(row["IdContabilidade"]),
+                    Contabilidade = new Contabilidade() { Id = Convert.ToInt32(row["IdContabilidade"]), Nome = row["NomeContabilidade"].ToString() }
+                });
+            }
+
+            return clientes;
         }
     }
 }

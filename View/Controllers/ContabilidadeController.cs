@@ -17,7 +17,7 @@ namespace View.Controllers
             repository = new ContabilidadeRepository();
         }
 
-        // GET: Categoria
+        // GET: Contabilidade
         public ActionResult Index()
         {
             ViewBag.Contabilidades = repository.ObterTodos("");

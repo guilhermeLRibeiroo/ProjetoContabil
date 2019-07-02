@@ -1,6 +1,6 @@
-﻿DROP TABLE IF EXISTS contabilidade;
+﻿DROP TABLE IF EXISTS contabilidades;
 
-CREATE TABLE contabilidade(
+CREATE TABLE contabilidades(
 	id INT PRIMARY KEY IDENTITY(1,1),
 	nome VARCHAR(100) NOT NULL
 );

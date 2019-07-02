@@ -16,7 +16,7 @@ namespace Repository.Repository
         public bool Apagar(int id)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "DELETE FROM contabilidade WHERE id = @ID";
+            comando.CommandText = "DELETE FROM contabilidades WHERE id = @ID";
             comando.Parameters.AddWithValue("@ID", id);
             int quantidadeafetada = comando.ExecuteNonQuery();
             comando.Connection.Close();
@@ -26,7 +26,7 @@ namespace Repository.Repository
         public bool Atualizar(Contabilidade contabilidade)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "UPDATE contabilidade SET nome = @NOME WHERE id = @ID";
+            comando.CommandText = "UPDATE contabilidades SET nome = @NOME WHERE id = @ID";
             comando.Parameters.AddWithValue("@NOME", contabilidade.Nome);
             comando.Parameters.AddWithValue("@ID", contabilidade.Id);
             int quantidadeafetada = comando.ExecuteNonQuery();
@@ -37,7 +37,7 @@ namespace Repository.Repository
         public int Inserir(Contabilidade contabilidade)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "INSERT INTO contabilidade OUTPUT INSERTED.ID VALUES (@NOME)";
+            comando.CommandText = "INSERT INTO contabilidades OUTPUT INSERTED.ID VALUES (@NOME)";
             comando.Parameters.AddWithValue("@NOME", contabilidade.Nome);
             int id = Convert.ToInt32(comando.ExecuteScalar());
             comando.Connection.Close();
