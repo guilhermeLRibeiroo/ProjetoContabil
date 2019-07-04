@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h3 class="text-center">Editar Usuarios</h3>
+
+<form action="@Url.Action("Update")" method="post" class="offset-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-login" class="text-center">Login</label>
+                <input type="text" name="login" id="campo-login col-6" class="form-control" value="@ViewBag.Usuario.Login" />
+
+                <label for="campo-senha" class="text-center">Senha</label>
+                <input type="password" name="senha" id="campo-senha col-6" class="form-control" value="@ViewBag.Usuario.Senha" />
+
+                <label for="campo-dataNascimento" class="text-center">Data de Nascimento</label>
+                <input type="date" name="dataNascimento" id="campo-dataNascimento col-6" class="form-control" value="@ViewBag.Usuario.DataNascimento" />
+
+                <input type="hidden" name="id" value="@ViewBag.Usuario.Id" />
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
+        </div>
+    </div>
+</form>
+
