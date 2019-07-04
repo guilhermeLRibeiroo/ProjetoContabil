@@ -217,6 +217,9 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\Cadastrar.cshtml" />
     <Content Include="Views\Cliente\Editar.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Cadastrar.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
