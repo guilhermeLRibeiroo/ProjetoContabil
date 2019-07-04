@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="text-center">Lista de Contas a Pagar</h3>
+
+<div class="row">
+    <div class="col-12 mb-1">
+        <a class="btn btn-dark" href="@Url.Action("Cadastrar")"><i class="fas fa-plus"></i> Nova Conta a Pagar</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-11">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Categoria</th>
+                    <th>Cliente</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Data de Vencimento</th>
+                    <th>Data de Pagamento</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(Model.ContaPagar contaPagar in ViewBag.ContasPagar)
+                {
+                    <tr>
+                        <td>@contaPagar.Id</td>
+                        <td>@contaPagar.Categoria.Nome</td>
+                        <td>@contaPagar.Cliente.Nome</td>
+                        <td>@contaPagar.Nome</td>
+                        <td>@contaPagar.Valor</td>
+                        <td>@contaPagar.DataVencimento.ToShortDateString()</td>
+                        <td>@contaPagar.DataPagamento.ToShortDateString()</td>
+                        <td>
+                            <a href="@Url.Action("Editar", new { id = contaPagar.Id })" class="btn btn-dark"><i class="fas fa-pen"></i> Editar</a>
+                            <a href="@Url.Action("Apagar", new { id = contaPagar.Id })" class="btn btn-dark"><i class="fas fa-trash"></i> Apagar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Código</th>
+                    <th>Categoria</th>
+                    <th>Cliente</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Data de Vencimento</th>
+                    <th>Data de Pagamento</th>
+                    <th>Ação</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

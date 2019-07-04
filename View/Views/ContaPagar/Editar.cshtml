@@ -1,0 +1,93 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Editar";
+}
+
+<h3 class="text-center">Editar Conta a Pagar</h3>
+
+<form action="@Url.Action("Update")" method="post" class="offset-4">
+    <input type="hidden" name="id" value="@ViewBag.ContaPagar.Id" />
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-nome">Nome</label>
+                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.ContaPagar.Nome" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-valor">Valor</label>
+                <input type="number" step=".01" name="valor" id="campo-valor" value="@ViewBag.ContaPagar.Valor.ToString().Replace(",", ".")"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-cliente">Cliente</label>
+                <select name="idCliente" id="campo-cliente">
+                    @foreach (Model.Cliente cliente in ViewBag.Clientes)
+                    {
+                        if (cliente.Id == ViewBag.ContaPagar.IdCliente)
+                        {
+                            <option selected value="@cliente.Id">@cliente.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@cliente.Id">@cliente.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-categoria">Categoria</label>
+                <select name="idCategoria" id="campo-categoria">
+                    @foreach (Model.Categoria categoria in ViewBag.Categorias)
+                    {
+                        if (categoria.Id == ViewBag.ContaPagar.IdCategoria)
+                        {
+                            <option selected value="@categoria.Id">@categoria.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@categoria.Id">@categoria.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-data-vencimento">Data de Vencimento</label>
+                <input type="date" name="dataVencimento" id="campo-data-vencimento" value="@ViewBag.ContaPagar.DataPagamento.ToString("yyyy-MM-dd")"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-data-pagamento">Data de Pagamento</label>
+                <input type="date" name="dataPagamento" id="campo-data-pagamento" value="@ViewBag.ContaPagar.DataPagamento.ToString("yyyy-MM-dd")"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
+    </div>
+</form>
