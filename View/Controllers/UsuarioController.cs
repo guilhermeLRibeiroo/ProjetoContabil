@@ -28,6 +28,9 @@ namespace View.Controllers
 
         public ActionResult Cadastrar()
         {
+            ContabilidadeRepository contabilidadeRepository = new ContabilidadeRepository();
+            ViewBag.Contabilidades = contabilidadeRepository.ObterTodos("");
+
             return View();
         }
 

@@ -26,10 +26,11 @@ namespace Repository.Repository
         public bool Atualizar(Usuario usuario)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "UPDATE usuarios SET login = @LOGIN,senha = @SENHA,data_nascimento = @DATA_NASCIMENTO WHERE id = @ID";
+            comando.CommandText = "UPDATE usuarios SET login = @LOGIN,senha = @SENHA,data_nascimento = @DATA_NASCIMENTO, id_constabilidade = @ID_CONTABILIDADE WHERE id = @ID";
             comando.Parameters.AddWithValue("@LOGIN", usuario.Login);
             comando.Parameters.AddWithValue("@SENHA", usuario.Senha);
             comando.Parameters.AddWithValue("@DATA_NASCIMENTO", usuario.DataNascimento);
+            comando.Parameters.AddWithValue("@ID_CONTABILIDADE", usuario.IdContabilidade);
             comando.Parameters.AddWithValue("@ID", usuario.Id);
             int quantidadeafetada = comando.ExecuteNonQuery();
             comando.Connection.Close();
@@ -39,12 +40,19 @@ namespace Repository.Repository
         public int Inserir(Usuario usuario)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "INSERT INTO usuarios(login,senha,data_nascimento) OUTPUT INSERTED.ID VALUES (@LOGIN,@SENHA,@DATA_NASCIMENTO)";
+            comando.CommandText = @"INSERT INTO usuarios
+            (login,senha,data_nascimento,id_contabilidade)
+            OUTPUT INSERTED.ID 
+            VALUES 
+            (@LOGIN,@SENHA,@DATA_NASCIMENTO,@ID_CONTABILIDADE)";
             comando.Parameters.AddWithValue("@LOGIN", usuario.Login);
             comando.Parameters.AddWithValue("@SENHA", usuario.Senha);
             comando.Parameters.AddWithValue("@DATA_NASCIMENTO", usuario.DataNascimento);
+            comando.Parameters.AddWithValue("@ID_CONTABILIDADE", usuario.IdContabilidade);
             int id = Convert.ToInt32(comando.ExecuteScalar());
+
             comando.Connection.Close();
+
             return id;
         }
 
@@ -77,8 +85,16 @@ namespace Repository.Repository
         {
             SqlCommand comando = Conexao.AbrirConexao();
             busca = $"%{busca}%";
-            comando.CommandText = "SELECT * FROM usuarios WHERE login LIKE @BUSCA ORDER BY id ASC";
-            comando.Parameters.AddWithValue("@BUSCA", busca);
+            comando.CommandText = @"SELECT 
+contabilidades.Id AS 'ContabilidadeID',
+contabilidades.Nome AS 'ContabilidadeNome',
+usuarios.login AS 'login', 
+usuarios.senha AS 'senha',
+usuarios.data_nascimento AS 'dataNascimento'
+FROM usuarios
+INNER JOIN contabilidades ON(usuarios.id_contabilidade = contabilidades.id)";
+         
+
 
             DataTable tabela = new DataTable();
             tabela.Load(comando.ExecuteReader());
@@ -88,10 +104,13 @@ namespace Repository.Repository
 
             foreach (DataRow row in tabela.Rows)
             {
+                Contabilidade contabilidade = new Contabilidade();
+
                 Usuario usuario = new Usuario();
                 usuario.Login = row["login"].ToString();
                 usuario.Senha = row["senha"].ToString();
                 usuario.DataNascimento = Convert.ToDateTime(row["data_nascimento"]);
+                usuario.IdContabilidade = Convert.ToInt32(row["id_contabilidade"]);
                 usuario.Id = Convert.ToInt32(row["id"].ToString());
                 usuarios.Add(usuario);
             }
