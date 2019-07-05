@@ -54,3 +54,20 @@ CREATE TABLE contas_pagar (
 	data_vencimento DATETIME2,
 	data_pagamento DATETIME2
 );
+
+--Contas a Receber
+DROP TABLE IF EXISTS contas_receber;
+
+CREATE TABLE contas_receber (
+	id INT PRIMARY KEY IDENTITY(1,1),
+	id_cliente INT,
+	FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+	id_categoria INT,
+	FOREIGN KEY (id_categoria) REFERENCES categorias(id),
+	nome VARCHAR(100),
+	valor DECIMAL(18,2),
+	data_pagamento DATETIME2
+);
+
+INSERT INTO contas_receber (id_cliente, id_categoria, nome, valor, data_pagamento) VALUES
+(1,1,'Conta Receber 1', 1, '2000-01-01');
