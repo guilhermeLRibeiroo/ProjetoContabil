@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h3 class="text-center">Editar Cartões De Credito</h3>
+
+<form action="@Url.Action("Store")" method="post" class="offset-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-cliente">Cliente</label>
+                <select id="campo-cliente" name="idCliente" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecionar Cliente</option>
+                    @foreach (Model.Cliente cliente in ViewBag.Clientes)
+                    {
+                        if (cliente.Id == ViewBag.CartaoCredito.IdCliente)
+                        {
+                            <option selected value="@cliente.Id">@cliente.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@cliente.Id">@cliente.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+
+                <label for="campo-numero" class="text-center">Numero</label>
+                <input type="number" name="numero" id="campo-numero col-6" class="form-control" value="@ViewBag.CartaoCredito.Numero" />
+
+                <label for="campo-dataVencimento" class="text-center">Data De Vencimento</label>
+                <input type="date" name="dataVencimento" id="campo-dataVencimento col-6" class="form-control" value="@ViewBag.CartaoCredito.DataVencimento.ToString("yyyy-MM-dd")" />
+
+                <label for="campo-cvv" class="text-center">CVV</label>
+                <input type="text" name="cvv" id="campo-cvv col-6" class="form-control" value="@ViewBag.CartaoCredito.CVV" />
+
+                <input type="hidden" name="id" value="@ViewBag.CartaoCredito.Id" />
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
+        </div>
+    </div>
+</form>
+
+
+

@@ -54,3 +54,14 @@ CREATE TABLE contas_pagar (
 	data_vencimento DATETIME2,
 	data_pagamento DATETIME2
 );
+
+DROP TABLE IF EXISTS cartoes_credito;
+
+CREATE TABLE cartoes_credito(
+	id INT PRIMARY KEY IDENTITY(1,1),
+	id_cliente INT,
+	FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+	numero VARCHAR(100),
+	data_vencimento DATETIME2,
+	cvv VARCHAR(100)
+);
