@@ -1,4 +1,4 @@
-﻿
+﻿    
 @{
     ViewBag.Title = "Editar";
 }
@@ -9,6 +9,20 @@
     <div class="row">
         <div class="col-12">
             <div class="form-group">
+                <label for="campo-contabilidade">Contabilidade</label>
+                <select id="campo-contabilidade" name="idContabilidade" class="form-control">
+                    <option disabled="disabled" selected="selected">Selecionar Contabilidade</option>
+                    @foreach (Model.Contabilidade contabilidade in ViewBag.Contabilidades)
+                    {
+                        <option value="@contabilidade.Id">@contabilidade.Nome</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
                 <label for="campo-login" class="text-center">Login</label>
                 <input type="text" name="login" id="campo-login col-6" class="form-control" value="@ViewBag.Usuario.Login" />
 
@@ -16,7 +30,7 @@
                 <input type="password" name="senha" id="campo-senha col-6" class="form-control" value="@ViewBag.Usuario.Senha" />
 
                 <label for="campo-dataNascimento" class="text-center">Data de Nascimento</label>
-                <input type="date" name="dataNascimento" id="campo-dataNascimento col-6" class="form-control" value="@ViewBag.Usuario.DataNascimento" />
+                <input type="date" name="dataNascimento" id="campo-dataNascimento col-6" class="form-control" value="@ViewBag.Usuario.DataNascimento.ToString("yyyy-MM-dd")" />
 
                 <input type="hidden" name="id" value="@ViewBag.Usuario.Id" />
 

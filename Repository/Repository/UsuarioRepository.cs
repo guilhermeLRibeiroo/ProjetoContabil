@@ -26,7 +26,7 @@ namespace Repository.Repository
         public bool Atualizar(Usuario usuario)
         {
             SqlCommand comando = Conexao.AbrirConexao();
-            comando.CommandText = "UPDATE usuarios SET login = @LOGIN,senha = @SENHA,data_nascimento = @DATA_NASCIMENTO, id_constabilidade = @ID_CONTABILIDADE WHERE id = @ID";
+            comando.CommandText = "UPDATE usuarios SET login = @LOGIN,senha = @SENHA,data_nascimento = @DATA_NASCIMENTO, id_contabilidade = @ID_CONTABILIDADE WHERE id = @ID";
             comando.Parameters.AddWithValue("@LOGIN", usuario.Login);
             comando.Parameters.AddWithValue("@SENHA", usuario.Senha);
             comando.Parameters.AddWithValue("@DATA_NASCIMENTO", usuario.DataNascimento);
@@ -41,7 +41,7 @@ namespace Repository.Repository
         {
             SqlCommand comando = Conexao.AbrirConexao();
             comando.CommandText = @"INSERT INTO usuarios
-            (login,senha,data_nascimento,id_contabilidade)
+            (login, senha, data_nascimento, id_contabilidade)
             OUTPUT INSERTED.ID 
             VALUES 
             (@LOGIN,@SENHA,@DATA_NASCIMENTO,@ID_CONTABILIDADE)";
@@ -88,6 +88,7 @@ namespace Repository.Repository
             comando.CommandText = @"SELECT 
 contabilidades.Id AS 'ContabilidadeID',
 contabilidades.Nome AS 'ContabilidadeNome',
+usuarios.id AS 'id',
 usuarios.login AS 'login', 
 usuarios.senha AS 'senha',
 usuarios.data_nascimento AS 'dataNascimento'
@@ -105,12 +106,16 @@ INNER JOIN contabilidades ON(usuarios.id_contabilidade = contabilidades.id)";
             foreach (DataRow row in tabela.Rows)
             {
                 Contabilidade contabilidade = new Contabilidade();
+                contabilidade.Id = Convert.ToInt32(row["ContabilidadeID"]);
+                contabilidade.Nome = row["ContabilidadeNome"].ToString();
 
                 Usuario usuario = new Usuario();
+                usuario.Contabilidade = contabilidade;
                 usuario.Login = row["login"].ToString();
                 usuario.Senha = row["senha"].ToString();
-                usuario.DataNascimento = Convert.ToDateTime(row["data_nascimento"]);
-                usuario.IdContabilidade = Convert.ToInt32(row["id_contabilidade"]);
+                usuario.DataNascimento = Convert.ToDateTime(row["dataNascimento"]);
+                usuario.IdContabilidade = Convert.ToInt32(row["ContabilidadeID"]);
+          
                 usuario.Id = Convert.ToInt32(row["id"].ToString());
                 usuarios.Add(usuario);
             }

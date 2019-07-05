@@ -34,12 +34,13 @@ namespace View.Controllers
             return View();
         }
 
-        public ActionResult Store(string login, string senha, DateTime dataNascimento)
+        public ActionResult Store(string login, string senha, DateTime dataNascimento, int idContabilidade)
         {
             Usuario usuario = new Usuario();
             usuario.Login = login;
             usuario.Senha = senha;
             usuario.DataNascimento = dataNascimento;
+            usuario.IdContabilidade = idContabilidade;
 
             repository.Inserir(usuario);
             return RedirectToAction("Index");
@@ -53,17 +54,21 @@ namespace View.Controllers
 
         public ActionResult Editar(int id)
         {
+            ContabilidadeRepository contabilidadeRepository = new ContabilidadeRepository();
+            ViewBag.Contabilidades = contabilidadeRepository.ObterTodos("");
+
             ViewBag.Usuario = repository.ObterPeloId(id);
             return View();
         }
 
-        public ActionResult Update(int id, string login, string senha, DateTime dataNascimento)
+        public ActionResult Update(int id, string login, string senha, DateTime dataNascimento, int idContabilidade)
         {
             Usuario usuario = new Usuario();
             usuario.Id = id;
             usuario.Login = login;
             usuario.Senha = senha;
             usuario.DataNascimento = dataNascimento;
+            usuario.IdContabilidade = idContabilidade;
 
             repository.Atualizar(usuario);
             return RedirectToAction("Index");

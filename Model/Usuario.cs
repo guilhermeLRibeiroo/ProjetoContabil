@@ -13,6 +13,6 @@ namespace Model
         public string Senha;
         public DateTime DataNascimento;
         public int IdContabilidade;
-        public Contabilidade contabilidade;
+        public Contabilidade Contabilidade;
     }
 }
