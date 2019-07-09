@@ -233,6 +233,7 @@
     <Content Include="Views\ContaReceber\Index.cshtml" />
     <Content Include="Views\ContaReceber\Cadastrar.cshtml" />
     <Content Include="Views\ContaReceber\Editar.cshtml" />
+    <Content Include="Views\Compra\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -242,7 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\Compra\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

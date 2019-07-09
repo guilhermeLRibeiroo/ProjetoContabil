@@ -5,13 +5,13 @@
 
 <h3 class="text-center">Editar Cartões De Credito</h3>
 
-<form action="@Url.Action("Store")" method="post" class="offset-4">
+<form action="@Url.Action("Update")" method="post" class="offset-4">
+                <input type="hidden" name="id" value="@ViewBag.CartaoCredito.Id" />
     <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-cliente">Cliente</label>
                 <select id="campo-cliente" name="idCliente" class="form-control">
-                    <option disabled="disabled" selected="selected">Selecionar Cliente</option>
                     @foreach (Model.Cliente cliente in ViewBag.Clientes)
                     {
                         if (cliente.Id == ViewBag.CartaoCredito.IdCliente)
@@ -40,7 +40,6 @@
                 <label for="campo-cvv" class="text-center">CVV</label>
                 <input type="text" name="cvv" id="campo-cvv col-6" class="form-control" value="@ViewBag.CartaoCredito.CVV" />
 
-                <input type="hidden" name="id" value="@ViewBag.CartaoCredito.Id" />
 
             </div>
         </div>

@@ -61,7 +61,7 @@ namespace View.Controllers
             cartao.DataVencimento = dataVencimento;
             cartao.CVV = cvv;
 
-            repository.Inserir(cartao);
+            repository.Atualizar(cartao);
             return RedirectToAction("Index");
         }
 

@@ -75,11 +75,11 @@ namespace Repository.Repository
             DataRow row = tabela.Rows[0];
             CartaoCredito cartao = new CartaoCredito();
 
+            cartao.Id = id;
             cartao.IdCliente = Convert.ToInt32(row["id_cliente"].ToString());
             cartao.Numero = row["numero"].ToString();
             cartao.DataVencimento = Convert.ToDateTime(row["data_vencimento"]);
             cartao.CVV = row["cvv"].ToString();
-
 
             return cartao;
         }

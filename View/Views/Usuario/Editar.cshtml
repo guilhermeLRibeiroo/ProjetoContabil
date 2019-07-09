@@ -1,4 +1,4 @@
-﻿    
+﻿
 @{
     ViewBag.Title = "Editar";
 }
@@ -11,10 +11,16 @@
             <div class="form-group">
                 <label for="campo-contabilidade">Contabilidade</label>
                 <select id="campo-contabilidade" name="idContabilidade" class="form-control">
-                    <option disabled="disabled" selected="selected">Selecionar Contabilidade</option>
                     @foreach (Model.Contabilidade contabilidade in ViewBag.Contabilidades)
                     {
-                        <option value="@contabilidade.Id">@contabilidade.Nome</option>
+                        if (contabilidade.Id == ViewBag.Usuario.IdContabilidade)
+                        {
+                            <option selected value="@contabilidade.Id">@contabilidade.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@contabilidade.Id">@contabilidade.Nome</option>
+                        }
                     }
                 </select>
             </div>
