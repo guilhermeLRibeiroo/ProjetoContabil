@@ -78,3 +78,13 @@ CREATE TABLE contas_receber (
 	valor DECIMAL(18,2),
 	data_pagamento DATETIME2
 );
+
+DROP TABLE IF EXISTS compras;
+
+CREATE TABLE compras(
+	id INT PRIMARY KEY IDENTITY(1,1),
+	valor DECIMAL(18,2),
+	data_compra DATETIME2,
+	id_cartao_credito INT,
+	FOREIGN KEY (id_cartao_credito) REFERENCES cartoes_credito(id)
+);

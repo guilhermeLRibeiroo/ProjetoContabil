@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<h3 class="text-center">Cadastrar Compra</h3>
+
+<form action="@Url.Action("Store")" method="post" class="offset-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-valor">Valor</label>
+                <input type="text" name="valor" id="campo-valor" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-cartao-credito">Número cartão de crédito</label>
+                <select name="idCartaoCredito" id="campo-cartao-credito">
+                    <option selected disabled value="-1">Selecione algum Cartão</option>
+                    @foreach (Model.CartaoCredito cartao in ViewBag.Cartoes)
+                    {
+                        <option value="@cartao.Id">@cartao.Numero</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-data-Compra">Data da Compra</label>
+                <input type="date" name="datacompra" id="campo-data-compra" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-dark  offset-5" type="submit"><i class="fas fa-save"></i>Salvar </button>
+    </div>
+</form>
+

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h3 class="text-center">Editar Compra</h3>
+
+<form action="@Url.Action("Update")" method="post" class="offset-4">
+    <input type="hidden" name="id" value="@ViewBag.Compra.Id"/>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-valor">Valor</label>
+                <input type="text" name="valor" id="campo-valor" class="form-control" value="@ViewBag.Compra.Valor" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-cartao-credito">Número cartão de crédito</label>
+                <select name="idCartaoCredito" id="campo-cartao-credito">
+                    @foreach (Model.CartaoCredito cartao in ViewBag.Cartoes)
+                    {
+                        if (cartao.Id == ViewBag.Compra.IdCartaoCredito)
+                        {
+                            <option selected value="@cartao.Id">@cartao.Numero</option>
+                        }
+                        else
+                        {
+                            <option value="@cartao.Id">@cartao.Numero</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-data-Compra">Data da Compra</label>
+                <input type="date" name="datacompra" id="campo-data-compra" value="@ViewBag.Compra.DataCompra.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-dark  offset-5" type="submit"><i class="fas fa-save"></i>Salvar </button>
+    </div>
+</form>
+

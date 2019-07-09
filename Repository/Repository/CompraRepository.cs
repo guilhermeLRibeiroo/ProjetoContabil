@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repository
 {
-    class CompraRepository : ICompraRepository
+    public class CompraRepository : ICompraRepository
     {
         public bool Apagar(int id)
         {
@@ -89,7 +89,7 @@ compras.id AS 'Id',
 compras.valor AS 'Valor',
 compras.data_compra AS 'DataCompra' 
 FROM compras
-INNER JOIN cartoes_credito ON ( compras.id_cartao_credito = cartao_credito.id)";
+INNER JOIN cartoes_credito ON ( compras.id_cartao_credito = cartoes_credito.id)";
 
             comando.Parameters.AddWithValue("@BUSCA", busca);
 
@@ -105,14 +105,14 @@ INNER JOIN cartoes_credito ON ( compras.id_cartao_credito = cartao_credito.id)";
                 cartaoCredito.Numero = row["NumeroCartao"].ToString();
 
                 Compra compra = new Compra();
-                compra.Valor = Convert.ToDecimal(row["valor"].ToString());
-                compra.DataCompra = Convert.ToDateTime(row["data_compra"].ToString());
+                compra.Valor = Convert.ToDecimal(row["Valor"].ToString());
+                compra.DataCompra = Convert.ToDateTime(row["DataCompra"].ToString());
 
                 compra.IdCartaoCredito= Convert.ToInt32(row["IdCartao"].ToString());
 
                 compra.CartaoCredito = cartaoCredito;
 
-                compra.Id = Convert.ToInt32(row["id"].ToString());
+                compra.Id = Convert.ToInt32(row["Id"].ToString());
 
                 compras.Add(compra);
             }
