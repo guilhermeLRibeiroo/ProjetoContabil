@@ -65,7 +65,7 @@ CREATE TABLE cartoes_credito(
 	data_vencimento DATETIME2,
 	cvv VARCHAR(100)
 );
-);
+
 
 --Contas a Receber
 DROP TABLE IF EXISTS contas_receber;
@@ -83,3 +83,14 @@ CREATE TABLE contas_receber (
 
 INSERT INTO contas_receber (id_cliente, id_categoria, nome, valor, data_pagamento) VALUES
 (1,1,'Conta Receber 1', 1, '2000-01-01');
+
+--Compras
+DROP TABLE IF EXISTS compras;
+
+CREATE TABLE compras (
+    id INT PRIMARY KEY IDENTITY(1,1),
+	id_cartao_credito INT,
+	FOREIGN KEY (cartao_credito) REFERENCES cartoes_credito(id),
+	valor DECIMAL(18,2),
+	datacompra DATETIME2,
+	);
