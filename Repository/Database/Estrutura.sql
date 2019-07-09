@@ -31,13 +31,11 @@ CREATE TABLE usuarios (
 DROP TABLE IF EXISTS clientes;
 
 CREATE TABLE clientes (
-	
 	id INT PRIMARY KEY IDENTITY(1,1),
 	nome VARCHAR(100),
 	cpf VARCHAR(100),
 	id_contabilidade INT,
 	FOREIGN KEY (id_contabilidade) REFERENCES contabilidades(id)
-	
 );
 
 --Contas a Pagar
@@ -65,7 +63,7 @@ CREATE TABLE cartoes_credito(
 	data_vencimento DATETIME2,
 	cvv VARCHAR(100)
 );
-);
+
 
 --Contas a Receber
 DROP TABLE IF EXISTS contas_receber;
@@ -80,6 +78,3 @@ CREATE TABLE contas_receber (
 	valor DECIMAL(18,2),
 	data_pagamento DATETIME2
 );
-
-INSERT INTO contas_receber (id_cliente, id_categoria, nome, valor, data_pagamento) VALUES
-(1,1,'Conta Receber 1', 1, '2000-01-01');

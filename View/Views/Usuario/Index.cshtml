@@ -31,7 +31,7 @@
                         <td>@usuario.Contabilidade.Nome</td>
                         <td>@usuario.Login</td>
                         <td>@usuario.Senha</td>
-                        <td>@usuario.DataNascimento</td>
+                        <td>@usuario.DataNascimento.ToShortDateString()</td>
                         <td>
                             <a href="@Url.Action("Editar", new { id = usuario.Id})" class="btn btn-dark"><i class="fas fa-pen"></i> Editar</a>
                             <a href="@Url.Action("Apagar", new { id = usuario.Id})" class="btn btn-dark"><i class="fas fa-trash"></i> Apagar</a>
