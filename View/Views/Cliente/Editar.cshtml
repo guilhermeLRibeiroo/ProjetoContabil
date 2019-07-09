@@ -10,22 +10,6 @@
     <div class="row">
         <div class="col-12">
             <div class="form-group">
-                <label for="campo-nome">Nome</label>
-                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Cliente.Nome" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="campo-cpf">CPF</label>
-                <input type="text" name="cpf" id="campo-cpf" class="form-control" value="@ViewBag.Cliente.CPF" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
                 <label for="campo-contabilidade">Contabilidade</label>
                 <select name="idContabilidade" id="campo-contabilidade" class="form-control">
                     @foreach (Model.Contabilidade contabilidade in ViewBag.Contabilidades)
@@ -43,6 +27,23 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-nome">Nome</label>
+                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.Cliente.Nome" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-cpf">CPF</label>
+                <input type="text" name="cpf" id="campo-cpf" class="form-control" value="@ViewBag.Cliente.CPF" />
+            </div>
+        </div>
+    </div>
+
     <div class="col-12">
         <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
     </div>

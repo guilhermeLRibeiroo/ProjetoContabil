@@ -33,12 +33,12 @@
 
                 <label for="campo-numero" class="text-center">Numero</label>
                 <input type="number" name="numero" id="campo-numero col-6" class="form-control" value="@ViewBag.CartaoCredito.Numero" />
+                
+                <label for="campo-cvv" class="text-center">CVV</label>
+                <input type="text" name="cvv" id="campo-cvv col-6" class="form-control" value="@ViewBag.CartaoCredito.CVV" />
 
                 <label for="campo-dataVencimento" class="text-center">Data De Vencimento</label>
                 <input type="date" name="dataVencimento" id="campo-dataVencimento col-6" class="form-control" value="@ViewBag.CartaoCredito.DataVencimento.ToString("yyyy-MM-dd")" />
-
-                <label for="campo-cvv" class="text-center">CVV</label>
-                <input type="text" name="cvv" id="campo-cvv col-6" class="form-control" value="@ViewBag.CartaoCredito.CVV" />
 
 
             </div>

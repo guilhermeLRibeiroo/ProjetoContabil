@@ -6,23 +6,6 @@
 <h3 class="text-center">Cadastrar Conta à Pagar</h3>
 
 <form action="@Url.Action("Store")" method="post" class="offset-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="campo-nome">Nome</label>
-                <input type="text" name="nome" id="campo-nome" class="form-control" />
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="campo-valor">Valor</label>
-                <input type="number" step="any" name="valor" id="campo-valor" class="form-control"/>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-12">
@@ -53,12 +36,30 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-nome">Nome</label>
+                <input type="text" name="nome" id="campo-nome" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-valor">Valor</label>
+                <input type="number" step="any" name="valor" id="campo-valor" class="form-control" />
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-data-vencimento">Data de Vencimento</label>
-                <input type="date" name="dataVencimento" id="campo-data-vencimento" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                <input type="date" name="dataVencimento" id="campo-data-vencimento" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
             </div>
         </div>
     </div>
@@ -67,7 +68,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-data-pagamento">Data de Pagamento</label>
-                <input type="date" name="dataPagamento" id="campo-data-pagamento" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                <input type="date" name="dataPagamento" id="campo-data-pagamento" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
             </div>
         </div>
     </div>

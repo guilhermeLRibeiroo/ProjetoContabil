@@ -7,25 +7,6 @@
 
 <form action="@Url.Action("Update")" method="post" class="offset-4">
     <input type="hidden" name="id" value="@ViewBag.ContaReceber.Id" />
-
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="campo-nome">Nome</label>
-                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.ContaReceber.Nome" />
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="campo-valor">Valor</label>
-                <input type="number" name="valor" step=".01" id="campo-valor" value="@ViewBag.ContaReceber.Valor.ToString().Replace(",",".")" />
-            </div>
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-12">
             <div class="form-group">
@@ -73,6 +54,25 @@
     <div class="row">
         <div class="col-12">
             <div class="form-group">
+                <label for="campo-nome">Nome</label>
+                <input type="text" name="nome" id="campo-nome" class="form-control" value="@ViewBag.ContaReceber.Nome" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="campo-valor">Valor</label>
+                <input type="number" name="valor" step=".01" id="campo-valor" value="@ViewBag.ContaReceber.Valor.ToString().Replace(",",".")" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
                 <label for="campo-data-pagamento">Data de Pagamento</label>
                 <input type="date" name="dataPagamento" id="campo-data-pagamento" value="@ViewBag.ContaReceber.DataPagamento.ToString("yyyy-MM-dd")" />
             </div>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="col-12">
-       <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
+        <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
     </div>
 </form>
 
