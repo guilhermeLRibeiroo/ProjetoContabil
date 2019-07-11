@@ -29,7 +29,7 @@
                     <tr class="text-center">
                         <td>@compra.Id</td>
                         <td>@compra.CartaoCredito.Numero</td>
-                        <td>@compra.Valor</td>
+                        <td> R$ @compra.Valor</td>
                         <td>@compra.DataCompra.ToShortDateString()</td>
                         <td>
                             <a href="@Url.Action("Editar", new { id = compra.Id })" class="btn btn-dark"><i class="fas fa-pen"></i> Editar</a>
