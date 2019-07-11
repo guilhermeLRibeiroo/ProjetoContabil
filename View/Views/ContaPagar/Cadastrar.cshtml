@@ -1,11 +1,13 @@
 ﻿
 @{
+    /**/
+
     ViewBag.Title = "Cadastrar";
 }
 
 <h3 class="text-center">Cadastrar Conta à Pagar</h3>
 
-<form action="@Url.Action("Store")" method="post" class="offset-4">
+<form action="@Url.Action("Store")" method="post" class="offset-4" id="cadastrarForm">
 
     <div class="row">
         <div class="col-12">
@@ -77,3 +79,72 @@
         <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
     </div>
 </form>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('#valor').mask('000.000.000.000.000,00', { reverse: true });
+
+        var selectedCliente = 0;
+        var selectedCategoria = 0;
+
+        $('#campo-categoria').change(() => {
+            selectedCategoria = $('#campo-categoria').children("option:selected").val();
+        });
+
+        $('#campo-cliente').change(() => {
+            selectedCliente = $('#campo-cliente').children("option:selected").val();
+        });
+
+        $('#cadastrarForm').validate({
+            rules: {
+                valor: {
+                    required:true
+                },
+                idCliente: {
+                    required: function () {
+                        return selectedCliente == 0;
+                    }
+                },
+                idCategoria: {
+                    required: function () {
+                        return selectedCategoria == 0;
+                    }
+                },
+                nome: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                nome: {
+                    required: "Por favor, coloque algum nome",
+                    minlength: "O nome deve conter 2 caractéres no mínimo."
+                },
+                idCliente: {
+                    required: "Selecione algum cliente."
+                },
+                idCategoria: {
+                    required: "Selecione alguma categoria."
+                }
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                error.addClass("help-block text-danger");
+
+                if (element.prop("type") === ("checkbox")) {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(".error").addClass("text-danger").removeClass("text-success");
+                $(element).addClass("bordered border-danger").removeClass("bordered border-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("bordered border-success").removeClass("bordered border-danger");
+            }
+        });
+    });
+</script>

@@ -7,14 +7,14 @@
 
 <h3 class="text-center">Editar Conta à Pagar</h3>
 
-<form action="@Url.Action("Update")" method="post" class="offset-4">
+<form action="@Url.Action("Update")" method="post" class="offset-4" id="editarForm">
     <input type="hidden" name="id" value="@ViewBag.ContaPagar.Id" />
 
     <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-cliente">Cliente</label>
-                <select name="idCliente" id="campo-cliente">
+                <select class="form-control" name="idCliente" id="campo-cliente">
                     @foreach (Model.Cliente cliente in ViewBag.Clientes)
                     {
                         if (cliente.Id == ViewBag.ContaPagar.IdCliente)
@@ -35,7 +35,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-categoria">Categoria</label>
-                <select name="idCategoria" id="campo-categoria">
+                <select class="form-control" name="idCategoria" id="campo-categoria">
                     @foreach (Model.Categoria categoria in ViewBag.Categorias)
                     {
                         if (categoria.Id == ViewBag.ContaPagar.IdCategoria)
@@ -65,7 +65,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-valor">Valor</label>
-                <input type="number" step=".01" name="valor" id="campo-valor" value="@ViewBag.ContaPagar.Valor.ToString().Replace(",", ".")" />
+                <input class="form-control" type="text" name="valor" id="campo-valor" value="@ViewBag.ContaPagar.Valor.ToString().Replace(",", ".")" />
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-data-vencimento">Data de Vencimento</label>
-                <input type="date" name="dataVencimento" id="campo-data-vencimento" value="@ViewBag.ContaPagar.DataPagamento.ToString("yyyy-MM-dd")" />
+                <input class="form-control" type="date" name="dataVencimento" id="campo-data-vencimento" value="@ViewBag.ContaPagar.DataPagamento.ToString("yyyy-MM-dd")" />
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-data-pagamento">Data de Pagamento</label>
-                <input type="date" name="dataPagamento" id="campo-data-pagamento" value="@ViewBag.ContaPagar.DataPagamento.ToString("yyyy-MM-dd")" />
+                <input class="form-control" type="date" name="dataPagamento" id="campo-data-pagamento" value="@ViewBag.ContaPagar.DataPagamento.ToString("yyyy-MM-dd")" />
             </div>
         </div>
     </div>
@@ -92,3 +92,72 @@
         <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
     </div>
 </form>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+<script>
+    $(document).ready(() => {
+        $('#valor').mask('000.000.000.000.000,00', { reverse: true });
+
+        var selectedCliente = 0;
+        var selectedCategoria = 0;
+
+        $('#campo-categoria').change(() => {
+            selectedCategoria = $('#campo-categoria').children("option:selected").val();
+        });
+
+        $('#campo-cliente').change(() => {
+            selectedCliente = $('#campo-cliente').children("option:selected").val();
+        });
+
+        $('#editarForm').validate({
+            rules: {
+                valor: {
+                    required: true
+                },
+                idCliente: {
+                    required: function () {
+                        return selectedCliente == 0;
+                    }
+                },
+                idCategoria: {
+                    required: function () {
+                        return selectedCategoria == 0;
+                    }
+                },
+                nome: {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                nome: {
+                    required: "Por favor, coloque algum nome",
+                    minlength: "O nome deve conter 2 caractéres no mínimo."
+                },
+                idCliente: {
+                    required: "Selecione algum cliente."
+                },
+                idCategoria: {
+                    required: "Selecione alguma categoria."
+                }
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                error.addClass("help-block text-danger");
+
+                if (element.prop("type") === ("checkbox")) {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(".error").addClass("text-danger").removeClass("text-success");
+                $(element).addClass("bordered border-danger").removeClass("bordered border-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("bordered border-success").removeClass("bordered border-danger");
+            }
+        });
+    });
+</script>

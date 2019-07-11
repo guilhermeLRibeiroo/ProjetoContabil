@@ -72,7 +72,7 @@ namespace View.Controllers
             {
                 Id = id,
                 Nome = nome,
-                Valor = Convert.ToDecimal(valor.Replace(".", ",")),
+                Valor = Convert.ToDecimal(valor),
                 IdCategoria = idCategoria,
                 IdCliente = idCliente,
                 DataPagamento = Convert.ToDateTime(dataPagamento)

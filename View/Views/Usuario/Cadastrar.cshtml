@@ -5,13 +5,13 @@
 
 <h3 class="text-center">Cadastrar Usuarios</h3>
 
-<form action="@Url.Action("Store")" method="post" class="offset-4">
+<form action="@Url.Action("Store")" method="post" class="offset-4" id="cadastrarForm">
     <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-contabilidade">Contabilidade</label>
                 <select id="campo-contabilidade" name="idContabilidade" class="form-control">
-                    <option disabled="disabled" selected="selected">Selecionar Contabilidade</option>
+                    <option disabled="disabled" selected="selected" value="0">Selecionar Contabilidade</option>
                     @foreach (Model.Contabilidade contabilidade in ViewBag.Contabilidades)
                     {
                         <option value="@contabilidade.Id">@contabilidade.Nome</option>
@@ -24,13 +24,24 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-login" class="text-center">Login</label>
-                <input type="text" name="login" id="campo-login col-6" class="form-control" />
-
+                <input type="text" name="login" id="campo-login" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
                 <label for="campo-senha" class="text-center">Senha</label>
-                <input type="password" name="senha" id="campo-senha col-6" class="form-control" />
+                <input type="password" name="senha" id="campo-senha" class="form-control" />
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
                 <label for="campo-dataNascimento" class="text-center">Data de Nascimento</label>
-                <input type="date" name="dataNascimento" id="campo-dataNascimento col-6" class="form-control" value="2000-01-01"/>
+                <input type="date" name="dataNascimento" id="campo-dataNascimento" class="form-control" value="2000-01-01" />
             </div>
         </div>
     </div>
@@ -40,4 +51,56 @@
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(() => {
+        var selectedContabilidade = 0;
 
+        $('#campo-contabilidade').change(() => {
+            selectedContabilidade = $('#campo-contabilidade').children("option:selected").val();
+        });
+
+        $('#cadastrarForm').validate({
+            rules: {
+                idContabilidade: {
+                    required: function () {
+                        return selectedContabilidade == 0;
+                    }
+                },
+                login: {
+                    required: true
+                },
+                senha: {
+                    required: true
+                }
+            },
+            messages: {
+                login: {
+                    required: "Por favor preencha o login."
+                },
+                senha: {
+                    required: "Por favor digite a senha."
+                },
+                idContabilidade: {
+                    required: "Selecione alguma contabilidade."
+                }
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                error.addClass("help-block text-danger");
+
+                if (element.prop("type") === ("checkbox")) {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(".error").addClass("text-danger").removeClass("text-success");
+                $(element).addClass("bordered border-danger").removeClass("bordered border-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("bordered border-success").removeClass("bordered border-danger");
+            }
+        });
+    });
+</script>

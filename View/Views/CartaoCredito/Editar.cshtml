@@ -5,8 +5,8 @@
 
 <h3 class="text-center">Editar Cartões De Credito</h3>
 
-<form action="@Url.Action("Update")" method="post" class="offset-4">
-                <input type="hidden" name="id" value="@ViewBag.CartaoCredito.Id" />
+<form action="@Url.Action("Update")" method="post" class="offset-4" id="editarForm">
+    <input type="hidden" name="id" value="@ViewBag.CartaoCredito.Id" />
     <div class="row">
         <div class="col-12">
             <div class="form-group">
@@ -27,29 +27,101 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12">
+            <label for="campo-numero" class="text-center">Numero</label>
             <div class="form-group">
-
-                <label for="campo-numero" class="text-center">Numero</label>
-                <input type="number" name="numero" id="campo-numero col-6" class="form-control" value="@ViewBag.CartaoCredito.Numero" />
-                
-                <label for="campo-cvv" class="text-center">CVV</label>
-                <input type="text" name="cvv" id="campo-cvv col-6" class="form-control" value="@ViewBag.CartaoCredito.CVV" />
-
-                <label for="campo-dataVencimento" class="text-center">Data De Vencimento</label>
-                <input type="date" name="dataVencimento" id="campo-dataVencimento col-6" class="form-control" value="@ViewBag.CartaoCredito.DataVencimento.ToString("yyyy-MM-dd")" />
-
-
+                <input type="number" name="numero" id="campo-numero" class="form-control" value="@ViewBag.CartaoCredito.Numero" />
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <label for="campo-cvv" class="text-center">CVV</label>
+            <div class="form-group">
+                <input type="text" name="cvv" id="campo-cvv" class="form-control" value="@ViewBag.CartaoCredito.CVV" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <label for="campo-dataVencimento" class="text-center">Data De Vencimento</label>
+            <div class="form-group">
+                <input type="date" name="dataVencimento" id="campo-dataVencimento" class="form-control" value="@ViewBag.CartaoCredito.DataVencimento.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
         </div>
     </div>
+
 </form>
+<script>
+
+    var selectedCliente = 0;
 
 
+    $('#campo-cliente').change(() => {
+        selectedCliente = $('#campo-cliente').children("option:selected").val();
+    });
 
+    $(document).ready(() => {
+        $('#editarForm').validate({
+            rules: {
+                idCliente: {
+                    required: function () {
+                        return selectedCliente == 0;
+                    }
+                },
+                numero: {
+                    required: true,
+                    minlength: 16,
+                    maxlength: 16
+                },
+                cvv: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 3
+                }
+            },
+            messages: {
+                numero: {
+                    required: "Por favor coloque algum Numero",
+                    minlength: "Digite o numero do cartao de credito (16 numeros)",
+                    maxlength: "Digite o numero do cartao de credito (16 numeros)"
+                },
+                cvv: {
+                    required: "Por favor digite algo no CVV",
+                    minlength: "Por favor digite um CVV com 3 caractéres",
+                    maxlength: "Por favor digite um CVV com 3 caractéres"
+                },
+                idCliente: {
+                    required: "Selecione algum cliente."
+                }
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                error.addClass("help-block text-danger");
+
+                if (element.prop("type") === ("checkbox")) {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(".error").addClass("text-danger").removeClass("text-success");
+                $(element).addClass("bordered border-danger").removeClass("bordered border-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("bordered border-success").removeClass("bordered border-danger");
+            }
+        });
+    });
+</script>

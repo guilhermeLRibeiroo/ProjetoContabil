@@ -5,12 +5,12 @@
 
 <h3 class="text-center">Cadastrar Categoria</h3>
 
-<form action="@Url.Action("Store")" method="post" class="offset-4">
+<form action="@Url.Action("Store")" method="post" class="offset-4" id="cadastrarForm">
     <div class="row">
         <div class="col-12">
+            <label for="campo_nome" class="text-center ">Nome</label>
             <div class="form-group">
-                <label for="campo-nome" class="text-center">Nome</label>
-                <input type="text" name="nome" id="campo-nome col-6" class="form-control" />
+                <input type="text" name="nome" id="campo_nome" class="form-control" />
             </div>
         </div>
     </div>
@@ -19,4 +19,40 @@
             <button class="btn btn-dark offset-5" type="submit"><i class="fas fa-save"></i> Salvar</button>
         </div>
     </div>
+
 </form>
+    <script>
+        $(document).ready(() => {
+            $('#cadastrarForm').validate({
+                rules: {
+                    nome: {
+                        required: true,
+                        minlength: 2
+                    }
+                },
+                messages: {
+                    nome: {
+                        required: "Por favor, coloque algum nome",
+                        minlength: "O nome deve conter 2 caractéres no mínimo."
+                    }
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    error.addClass("help-block text-danger");
+
+                    if (element.prop("type") === ("checkbox")) {
+                        error.insertAfter(element.parent("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(".error").addClass("text-danger").removeClass("text-success");
+                    $(element).addClass("bordered border-danger").removeClass("bordered border-success");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass("bordered border-success").removeClass("bordered border-danger");
+                }
+            });
+        });
+    </script>

@@ -65,7 +65,7 @@ namespace View.Controllers
             {
                 Id = id,
                 IdCartaoCredito = idCartaoCredito,
-                Valor = Convert.ToDecimal(valor.ToString().Replace(".", ",")),
+                Valor = Convert.ToDecimal(valor.ToString()),
                 DataCompra = Convert.ToDateTime(datacompra)
             };
 

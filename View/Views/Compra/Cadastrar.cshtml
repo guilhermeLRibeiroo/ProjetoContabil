@@ -5,13 +5,13 @@
 
 <h3 class="text-center">Cadastrar Compra</h3>
 
-<form action="@Url.Action("Store")" method="post" class="offset-4">
+<form action="@Url.Action("Store")" method="post" class="offset-4" id="cadastrarForm">
 
     <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-cartao-credito">Número cartão de crédito</label>
-                <select name="idCartaoCredito" id="campo-cartao-credito">
+                <select class="form-control" name="idCartaoCredito" id="campo-cartao-credito">
                     <option selected disabled value="-1">Selecione algum Cartão</option>
                     @foreach (Model.CartaoCredito cartao in ViewBag.Cartoes)
                     {
@@ -27,7 +27,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-valor">Valor</label>
-                <input type="text" name="valor" id="campo-valor" class="form-control" />
+                <input type="number" step=".01" name="valor" id="campo-valor" class="form-control" />
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="campo-data-Compra">Data da Compra</label>
-                <input type="date" name="datacompra" id="campo-data-compra" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <input class="form-control" type="date" name="datacompra" id="campo-data-compra" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
             </div>
         </div>
     </div>
@@ -47,3 +47,52 @@
     </div>
 </form>
 
+<script>
+
+    var selectedCartao = 0;
+
+
+    $('#campo-cartao-credito').change(() => {
+        selectedCartao = $('#campo-cartao-credito').children("option:selected").val();
+    });
+
+    $(document).ready(() => {
+        $('#cadastrarForm').validate({
+            rules: {
+                idCartaoCredito: {
+                    required: function () {
+                        return selectedCartao == 0;
+                    }
+                },
+                valor: {
+                    required: true
+                }
+            },
+            messages: {
+                valor: {
+                    required: "Por favor coloque algum valor"
+                },
+                idCartaoCredito: {
+                    required: "Selecione algum Cartão."
+                }
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                error.addClass("help-block text-danger");
+
+                if (element.prop("type") === ("checkbox")) {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(".error").addClass("text-danger").removeClass("text-success");
+                $(element).addClass("bordered border-danger").removeClass("bordered border-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("bordered border-success").removeClass("bordered border-danger");
+            }
+        });
+    });
+</script>
